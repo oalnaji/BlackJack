@@ -1,0 +1,51 @@
+import random
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+player = random.choices(cards, k=2)
+computer = random.choices(cards, k=2)
+p_score = 0
+c_score = 0
+
+for num in player:
+    p_score += num
+
+for num in computer:
+    c_score += num
+
+print(f"Your cards: {player}, current score: {p_score}")
+print(f"Computer's first card: {computer[0]}")
+
+should_continue = True
+while should_continue:
+
+    second_round = input(f"Type 'y' to get another card, type 'n' to pass: ")
+
+    if second_round == "n":
+        print(f"Your final hand: {player}, final score: {p_score}")
+        print(f"Computer's final hand: {computer}, final score: {c_score}")
+        if p_score > c_score:
+            if p_score != 22:
+                print("You beat the computer. You win!")
+                should_continue = False
+            elif c_score == 21:
+                print("Its a draw I guess")
+                should_continue = False
+        elif c_score > p_score:
+            print("The computer was higher. You lose :(")
+            should_continue = False
+    else:
+        player.append(random.choice(cards))
+        p_score1 = 0
+        for num in player:
+            p_score1 += num
+        print(f"Your cards: {player}, current score: {p_score1}")
+      
+        if p_score1 > 21:
+            print(f"Computer's cards: {computer}, final score: {c_score}")
+            print("You went above 21, you lose!")
+            should_continue = False
+
+        if 21 >= p_score1 > c_score:
+            print(f"Computer's cards: {computer}, current score: {c_score}")
+        elif 21 >= c_score > p_score1:
+            print(f"Computer's cards: {computer}, current score: {c_score}")
